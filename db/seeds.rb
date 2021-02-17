@@ -9,6 +9,7 @@
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    title: %w[mr mrs miss sir].sample,
     phone: Faker::PhoneNumber.phone_number,
     status: %w[active inactive].sample,
   )
