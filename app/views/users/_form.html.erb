@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :from, [ 'active','inactive' ], :prompt => 'Select One' %>
   </div>
 
   <div class="actions">
