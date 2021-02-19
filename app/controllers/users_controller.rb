@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 25)
   end
 
   # GET /users/1 or /users/1.json
@@ -17,6 +17,18 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+ def search
+    if params[:search_param].blank?
+      flash.now[:danger] = "You have entered an empty search string"
+    else
+      @users = User.search(params[:search_param])
+      flash.now[:danger] = "No users match this search criteria" if @users.blank?
+    end
+    respond_to do |format|
+      format.js { render partial: 'users/result' }
+    end
   end
 
   # POST /users or /users.json
